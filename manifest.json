@@ -5,7 +5,7 @@
   "version": "1.0",
 
   "description": "Send URL of the current tab to a nominated logging server. Part of the Commerce Filtered Search initiative, to provide search of non-commercial (e.g. non clickbait) pages.",
-  "homepage_url": "https://github.com/mdn/webextensions-examples/tree/master/beastify",
+  "homepage_url": "https://gitlab.com/ksangeelee/send-tab-url",
   "icons": {
     "48": "icons/tag-plus-outline.svg",
     "96": "icons/tag-plus-outline.svg"
