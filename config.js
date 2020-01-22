@@ -1,3 +1,9 @@
+/**
+ * (C)2020 Kevin Sangeelee, released under the GNU GPLv2
+ * https://gitlab.com/ksangeelee/send-tab-url/tree/master
+ * See the above project for license terms.
+ */
+
 /*
  * If no target URL exists in storage, then create a default
  * configuration in storage.
