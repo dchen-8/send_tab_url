@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<!--
+    Options page.
+-->
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="options.css"/>
+  </head>
+
+  <body>
+
+    <p> The target URL can be configured here, where the placeholder '{URL}'
+    will be replaced with the current tab's URL. The placeholder <em>must</em>
+    be uppercase with curly-braces, exactly as shown. The configured target URL
+    is otherwise passed 'as-is' in the request, so you can include extra
+    parameters if needed.  </p>
+
+    <form>
+        <table style="width:100%">
+            <tr>
+              <th><label>Target URL</label></th>
+              <td><input type="text" id="url" placeholder="e.g. https://example.com/store.php?p={URL}" style="width:100%"/></td>
+              <th><button id="save-button" type="button">Save</button></th>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span id="message1"></span></td>
+                <th><span id="message2"></span></th>
+            </tr>
+        </table>
+    </form>
+
+    <p> By default, URLs are submitted to the CFS survey server and taken as
+    candidates for inclusion in the Commerce Filtered Search index. You can,
+    however, change this behaviour to send to any server you like. Your handler
+    should comply with the CORS protocol, e.g. by setting the response header
+    <code>Access-Control-Allow-Origin "*"</code> in the handler for this
+    request.  </p>
+
+    <ul style="list-style-type: none">
+        <lh><strong>Examples</strong></lh>
+        <li>https://www.example.com/store_link/?p={URL}</li>
+        <li>https://www.example.com/store_link/?p={URL}&myparam=myvalue</li>
+        <li>https://wwww.twitbook.uk/store_url.php?p={URL}&token=default</li>
+    </ul>
+
+    <script src="options.js"></script>
+  </body>
+</html>
+
