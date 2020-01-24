@@ -26,3 +26,30 @@ window.onload = ( () => {
     .catch( console.log );
 });
 
+/**
+ * This function was written by Daniel Aleksandersen, taken from his blog
+ * https://www.ctrl.blog/entry/firefox-browseraction-close-popout-android.html
+ */
+function closePopOut()
+{
+  return Promise.all(
+    [
+      browser.runtime.getBrowserInfo(),
+      browser.runtime.getPlatformInfo()
+    ]
+  ).then(
+    data =>
+    {
+      if (data[0].name == 'Firefox' &&
+          data[1].os == 'android')
+      {
+        return browser.tabs.update(
+          {active: true}
+        );
+      }
+    }
+  ).finally(
+    window.close
+  );
+}
+

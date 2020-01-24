@@ -11,6 +11,7 @@ let sanitisedUrl;
 function messageElement() {
     return document.querySelector("#message-content");
 }
+
 /**
  * Listen for clicks on the buttons, and send the appropriate message to
  * the content script in the page.
