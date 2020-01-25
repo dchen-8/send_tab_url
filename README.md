@@ -52,7 +52,7 @@ class UrlDB extends SQLite3
     function __construct() {
         $this->open('/opt/url_logger/url_store.db');
         $this->exec('create table if not exists urls(' .
-            'url text unique, integer status)');
+            'url text unique, status integer)');
     }
 }
 
