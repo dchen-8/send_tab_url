@@ -110,7 +110,7 @@ browser.tabs.query( {
     url.username = '';
     sanitisedUrl = url.href;
     console.log('Sanitised: ', sanitisedUrl);
-    document.querySelector("#url").innerHTML = '<span>'+sanitisedUrl+'</span>';
+    document.querySelector("#url").innerText = sanitisedUrl;
     
     // If we have a valid URL, then listen for clicks
     listenForClicks();
