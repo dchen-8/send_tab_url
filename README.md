@@ -35,6 +35,18 @@ This project is released under the GNU GPLv2, except the 'tag-plus-outline' icon
 which is by Michael Richins (@MrGrigri), available from Material Design Icons at
 https://materialdesignicons.com/ Used here with thanks!
 
+#### Using with the Linkalot server
+
+Linkalot is a basic but functional free-software server written in PHP that can
+be used as a repository for URLs, and offers a simple user-inferface to list
+and edit the URLs that you submit. An example of the URL format you can
+configure in the addon's preferences is shown below.
+
+```https://127.0.0.1/linkalot/?url={URL}&txt={TITLE}&key=SECRET```
+
+See https://gitlab.com/dmpop/linkalot for more information and installation
+instructions.
+
 #### My server code that receives URLs
 The following example shows PHP code that receives a request from the add-on and
 writes the given URL to a SQLite database (or alternatively, just a plain-text
