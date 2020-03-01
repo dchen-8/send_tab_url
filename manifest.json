@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "Send Tab URL",
-  "version": "1.3",
+  "version": "1.4",
 
   "description": "Send URL of the current tab to a nominated logging server. Part of the Commerce Filtered Search initiative, to provide search of non-commercial (e.g. non clickbait) pages.",
   "homepage_url": "https://gitlab.com/ksangeelee/send-tab-url",

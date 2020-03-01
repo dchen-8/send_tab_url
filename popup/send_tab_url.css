@@ -2,10 +2,18 @@ html, body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Ubuntu', 'Helvetica Neue', sans-serif;
   width: 300px;
   overflow-wrap: break-word;
+  color: black;
+  background-color: #bcd1dc;
 }
 
+p.info {
+  background-color: #dde8ee;
+  color: black;
+}
+
+
 h1 {
-  font-size:16px;
+  font-size:14px;
   text-align: center;
 }
 
@@ -27,6 +35,14 @@ h1 {
 
 #message-content p {
   text-align: center;
+}
+
+#title {
+  font-size: smaller;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  padding: 4px;
 }
 
 .hidden {

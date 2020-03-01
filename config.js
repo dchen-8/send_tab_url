@@ -10,7 +10,7 @@
  */
 window.onload = ( () => {
 
-    const defaultUrl = 'https://www.twitbook.uk/store_url.php?p={URL}';
+    const defaultUrl = 'https://www.twitbook.uk/store_url.php?p={URL}&title={TITLE}';
 
     let options = { targetUrl: defaultUrl };
 

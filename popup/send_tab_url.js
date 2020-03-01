@@ -34,9 +34,19 @@ function listenForClicks() {
         messageElement().innerHTML = "<p>Sending...</p>";
         document.querySelector("#send-button").disabled = true;
 
-        // We can assume that targetUrl has a placeholder, since it's included
-        // in the default value, and preferences won't update without one.
-        fetch(targetUrl.replace('{URL}', encodeURIComponent(tabUrl)),
+        /*
+         * The targetUrl is the template that's used in the GET request
+         * to the target server. The tokens {URL} and {TITLE} will be
+         * replaced by the URL and title of the tab. The values MUST
+         * be encoded.
+         */
+        let pageTitle = document.querySelector("#title").value;
+
+        let requestUrl = targetUrl
+            .replace('{TITLE}', encodeURIComponent(pageTitle))
+            .replace('{URL}', encodeURIComponent(tabUrl));
+
+        fetch(requestUrl,
             {
                 method: 'GET',
                 mode: 'cors', // no-cors, *cors, same-origin. See Request.mode
@@ -103,14 +113,19 @@ browser.tabs.query( {
 .then( (tabs) => {
     let tab = tabs[0];
     console.log(tab);
+
     const url = new URL(tab.url);
-    console.log(url);
+    //console.log(url);
+
     url.hash = '';
     url.password = '';
     url.username = '';
     sanitisedUrl = url.href;
+
     console.log('Sanitised: ', sanitisedUrl);
     document.querySelector("#url").innerText = sanitisedUrl;
+
+    document.querySelector("#title").value = tab.title;
     
     // If we have a valid URL, then listen for clicks
     listenForClicks();
