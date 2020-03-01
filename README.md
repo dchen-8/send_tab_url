@@ -1,5 +1,11 @@
 ### Firefox extension - send the current tab's URL as a GET request to a server.
 
+#### TL;DR
+The send-tab-url extension adds a button to Firefox that, when clicked, sends
+the current tab's URL and page title to a server that you configure in the
+extension's preferences.
+
+#### A bit more detail
 This was written as part of the Commerce Filtered Search initiative to record
 the URLs of high-quality or otherwise interesting web pages, and by default this
 extension logs the URLs to my server.
