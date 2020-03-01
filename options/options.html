@@ -12,11 +12,11 @@
 
   <body>
 
-    <p> The target URL can be configured here, where the placeholder '{URL}'
-    will be replaced with the current tab's URL. The placeholder <em>must</em>
-    be uppercase with curly-braces, exactly as shown. The configured target URL
-    is otherwise passed 'as-is' in the request, so you can include extra
-    parameters if needed.  </p>
+    <p>The target URL can be configured here, where the placeholders '{URL}'
+    and '{TITLE}' will be replaced with the current tab's URL and title. The
+    placeholders <em>must</em> be uppercase with curly-braces, exactly as shown.
+    The configured target URL is otherwise passed 'as-is' in the request, so
+    you can include extra parameters if needed.</p>
 
     <form>
         <table style="width:100%">
@@ -42,9 +42,9 @@
 
     <ul style="list-style-type: none">
         <lh><strong>Examples</strong></lh>
-        <li>https://www.example.com/store_link/?p={URL}</li>
-        <li>https://www.example.com/store_link/?p={URL}&myparam=myvalue</li>
-        <li>https://wwww.twitbook.uk/store_url.php?p={URL}&token=default</li>
+        <li>https://www.example.com/store_link/?url={URL}&amp;title={TITLE}</li>
+        <li>https://www.example.com/store_link/?p={URL}&amp;myparam=myvalue</li>
+        <li>https://wwww.twitbook.uk/store_url.php?p={URL}&amp;t={TITLE}&amp;token=default</li>
     </ul>
 
     <script src="options.js"></script>
