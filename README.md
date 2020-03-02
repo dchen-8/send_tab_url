@@ -61,6 +61,9 @@ of this is mandatory. Any handler that processes a GET request can be used.
 ```
 <?php
 
+// CORS policy - allow any page that we submit to read our response.
+header('Access-Control-Allow-Origin: *');
+
 /*
  * store_url.php
  */
