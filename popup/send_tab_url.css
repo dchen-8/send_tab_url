@@ -42,13 +42,6 @@ table.buttons button {
   font-size: 12px;
 }
 
-#send-button {
-  font-size: 14px;
-  padding: 8px;
-  border:1px solid;
-  border-radius: 5px;
-}
-
 #popup-content > p {
   padding: 10px;
   text-align: center;
@@ -78,4 +71,11 @@ table.buttons button {
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s 1s, opacity 1s linear;
+}
+
+.button {
+  font-size: 14px;
+  margin-bottom: 4px;
+  border:1px solid;
+  border-radius: 5px;
 }
