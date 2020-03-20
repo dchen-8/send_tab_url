@@ -3,18 +3,39 @@ html, body {
   width: 300px;
   overflow-wrap: break-word;
   color: black;
-  background-color: #bcd1dc;
+  background-color: #ffffa0;
 }
 
-p.info {
-  background-color: #dde8ee;
+p.info, #popup-content {
+  background-color: #ffffa0;
   color: black;
 }
-
 
 h1 {
   font-size:14px;
   text-align: center;
+}
+
+table.buttons {
+    width:100%;
+}
+
+table.buttons td {
+    font-size:14px;
+}
+
+table.buttons button {
+    background-color: #8fff80;
+    padding: 3px;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+#popup-content {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 8px;
 }
 
 #popup-content, #message-content {
@@ -33,16 +54,20 @@ h1 {
   text-align: center;
 }
 
-#message-content p {
+#message-content {
   text-align: center;
 }
 
+#url {
+  color: #444488;
+}
+
 #title {
-  font-size: smaller;
+/*  font-size: smaller;*/
   width: 100%;
-  border: none;
+  border: 1px solid black;
   border-radius: 5px;
-  padding: 4px;
+  padding: 5px;
 }
 
 .hidden {

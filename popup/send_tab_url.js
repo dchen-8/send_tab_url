@@ -5,12 +5,66 @@
  */
 
 
+let targetUrls;
 let targetUrl = 'Undefined';
 let sanitisedUrl;
 
 function messageElement() {
     return document.querySelector("#message-content");
 }
+
+function sendCurrentTabUrl(tabUrl, pageTitle, button) {
+
+    let targetUrl = button.dataset.url;
+    console.log('Sending: ', tabUrl, 'via', targetUrl);
+
+    /*
+     * Make a request to send the URL. Server should support CORS (i.e.
+     * include response header Access-Control-Allow-Origin), otherwise firefox
+     * prevents our code from accessing the response.
+     */
+
+    messageElement().classList.remove("hidden");
+    messageElement().innerText = "Sending...";
+
+    button.setAttribute('disabled', true);
+
+    /*
+     * The targetUrl is the template that's used in the GET request
+     * to the target server. The tokens {URL} and {TITLE} will be
+     * replaced by the URL and title of the tab. The values MUST
+     * be encoded.
+     */
+    let requestUrl = targetUrl
+        .replace('{TITLE}', encodeURIComponent(pageTitle))
+        .replace('{URL}', encodeURIComponent(tabUrl));
+
+    fetch(requestUrl,
+        {
+            method: 'GET',
+            mode: 'cors', // no-cors, *cors, same-origin. See Request.mode
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'omit', // include, *same-origin, omit
+        }
+    )
+     .then((response) => {
+         if(response.status === 200) {
+            messageElement().innerText = "URL was sent successfully.";
+            document.querySelector("#popup-content").classList.add('fadeout');
+            setTimeout( function() {
+                document.querySelector("#popup-content").classList.add("hidden");
+                messageElement().innerHTML = "<h1>Thanks!</h1>";
+                setTimeout( function() { window.close() }, 2300);
+            }, 1200);
+         } else {
+             throw 'Server responded with a failure (' + response.status + ')';
+         }
+     })
+     .catch( (err) => {
+         messageElement().innerText = 'Failed to send. ' + err;
+         console.log('Error: ', err) 
+     } );
+} /* end function sendTabUrl() */
 
 /**
  * Listen for clicks on the buttons, and send the appropriate message to
@@ -20,70 +74,14 @@ function listenForClicks() {
 
   document.addEventListener("click", (e) => {
 
-    function sendCurrentTabUrl(tabUrl) {
-
-        console.log('Sending: ', tabUrl);
-
-        /*
-         * Make a request to send the URL. Server should support CORS (i.e.
-         * include response header Access-Control-Allow-Origin), otherwise firefox
-         * prevents our code from accessing the response.
-         */
-
-        messageElement().classList.remove("hidden");
-        messageElement().innerHTML = "<p>Sending...</p>";
-        document.querySelector("#send-button").disabled = true;
-
-        /*
-         * The targetUrl is the template that's used in the GET request
-         * to the target server. The tokens {URL} and {TITLE} will be
-         * replaced by the URL and title of the tab. The values MUST
-         * be encoded.
-         */
-        let pageTitle = document.querySelector("#title").value;
-
-        let requestUrl = targetUrl
-            .replace('{TITLE}', encodeURIComponent(pageTitle))
-            .replace('{URL}', encodeURIComponent(tabUrl));
-
-        fetch(requestUrl,
-            {
-                method: 'GET',
-                mode: 'cors', // no-cors, *cors, same-origin. See Request.mode
-                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                credentials: 'omit', // include, *same-origin, omit
-            }
-        )
-         .then((response) => {
-             if(response.status === 200) {
-                messageElement().innerHTML = "<p>URL was sent successfully.</p>";
-                document.querySelector("#popup-content").classList.add('fadeout');
-                setTimeout( function() {
-                    document.querySelector("#popup-content").classList.add("hidden");
-                    messageElement().innerHTML = "<h1>Thanks!</h1>";
-                    setTimeout( function() { window.close() }, 2000);
-                }, 1200);
-             }
-         })
-         .catch( (err) => {
-             messageElement().innerHTML = "<p>Failed to send. Please check server settings.</p>";
-             console.log('Error: ', err) 
-         } );
-    }
-
     /**
-     * Just log the error to the console.
-     */
-    function reportError(error) {
-      console.error(`Could not beastify: ${error}`);
-    }
-
-    /**
-     * Get the active tab, then call sendCurrentTabUrl()
+     * Check the event came from a button, then call sendCurrentTabUrl()
      */
     if (e.target.classList.contains("button")) {
 
-        sendCurrentTabUrl(sanitisedUrl);
+        let pageTitle = document.querySelector("#title").value;
+
+        sendCurrentTabUrl(sanitisedUrl, pageTitle, e.target);
     }
   });
 }
@@ -94,8 +92,26 @@ function listenForClicks() {
 browser.storage.local.get()
 .then( (config) => {
 
-    if(typeof config.targetUrl == 'string') {
-        targetUrl = config.targetUrl;
+    if(config.hasOwnProperty('targetUrls') && Array.isArray(config.targetUrls)) {
+
+        targetUrls = config.targetUrls;
+        for(idx = 0; idx < 3; idx++) {
+            let t = targetUrls[idx];
+            let button = document.getElementById('send-button' + idx);
+
+            let disabled = (t.name != '' && t.url != '') ? false : true;
+            
+            if(disabled) {
+                button.setAttribute('disabled', true);
+                button.innerText = 'Empty';
+                button.dataset.url = '';
+            } else {
+                button.removeAttribute('disabled');
+                button.innerText = 'Send to ' + t.name;
+                button.dataset.url = t.url;
+            }
+        }
+
     }
 });
 

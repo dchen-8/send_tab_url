@@ -19,16 +19,34 @@
     you can include extra parameters if needed.</p>
 
     <form>
+        <table id="targetUrls" style="width:100%">
+            <tr>
+              <th><label>Name</label></th>
+              <th><label>Target URL</label></th>
+            </tr>
+            <tr id="targetUrl0">
+              <td id="target0" style="width:20%">
+                <input
+                  id="name0"
+                  type="text"
+                  placeholder="myserver"
+                  style="width:100%"/>
+              </td>
+              <td>
+                <input
+                  id="url0"
+                  type="text"
+                  placeholder="e.g. https://example.com/store.php?p={URL}"
+                  style="width:100%"/>
+              </td>
+            </tr>
+            <tr id="save-button-row">
+              <th colspan="2"><button id="save-button" type="button">Save</button></th>
+            </tr>
+        </table>
         <table style="width:100%">
             <tr>
-              <th><label>Target URL</label></th>
-              <td><input type="text" id="url" placeholder="e.g. https://example.com/store.php?p={URL}" style="width:100%"/></td>
-              <th><button id="save-button" type="button">Save</button></th>
-            </tr>
-            <tr>
-                <td></td>
                 <td><span id="message1"></span></td>
-                <th><span id="message2"></span></th>
             </tr>
         </table>
     </form>
