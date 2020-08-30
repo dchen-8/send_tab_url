@@ -38,13 +38,16 @@ function sendCurrentTabUrl(tabUrl, pageTitle, button) {
     let requestUrl = targetUrl
         .replace('{TITLE}', encodeURIComponent(pageTitle))
         .replace('{URL}', encodeURIComponent(tabUrl));
+    let form_data = new FormData()
+    form_data.append('url', tabUrl)
 
     fetch(requestUrl,
         {
-            method: 'GET',
-            mode: 'cors', // no-cors, *cors, same-origin. See Request.mode
+            method: 'POST',
+            mode: 'no-cors', // no-cors, *cors, same-origin. See Request.mode
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
             credentials: 'omit', // include, *same-origin, omit
+            body: form_data,
         }
     )
      .then((response) => {

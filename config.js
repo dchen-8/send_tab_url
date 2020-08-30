@@ -11,8 +11,8 @@
 window.onload = ( () => {
 
     const defaultUrls = [
-        { name: 'twitbook', url: 'https://www.twitbook.uk/store_url.php?p={URL}&t={TITLE}' },
-        { name: 'Linkalot', url: 'https://127.0.0.1/linkalot/?url={URL}&txt={TITLE}&key=SECRET' },
+        { name: 'youtube-dl', url: 'http://192.168.86.99:9600/youtube-dl/q' },
+        { name: 'gallery-dl', url: 'http://192.168.86.99:9690/gallery-dl' },
         { name: '', url: '' }
     ];
 
